@@ -311,6 +311,8 @@ import PurchaseBillList from "./pages/Admin/PurchaseBill/PurchaseBillList.jsx";
 import PurchaseBillDetails from "./pages/Admin/PurchaseBill/PurchaseBillDetails.jsx";
 import InvoicePrint from "./pages/Admin/PurchaseBill/InvoicePrint.jsx";
 
+
+import ItDashboard from "./pages/It-Support/ItDashboard";
 import ItSupport from "./pages/It-Support/ItSupport.jsx";
 import CusromerTicket from "./pages/It-Support/CusromerTicket.jsx";
 import ItSupportLeave from "./pages/It-Support/ItSupportLeave.jsx";
@@ -538,7 +540,7 @@ function App() {
     location.pathname.startsWith("/edit-product/") ||
     location.pathname.startsWith("/view-product/") ||
     location.pathname.startsWith("/edit-subcategory/") ||
-      location.pathname.startsWith("/admin/edit-employee/") ||
+    location.pathname.startsWith("/admin/edit-employee/") ||
 
     location.pathname.startsWith("/admin/orders/") ||
     location.pathname.startsWith("/shipment/") ||
@@ -558,14 +560,14 @@ function App() {
 
   // const hideGlobalHeader = isAdminLayoutRoute || isDynamicAdminRoute;
 
-  
-const isOrderDetailsRoute =
-  location.pathname.startsWith("/order/");
 
-const hideGlobalHeader =
-  isAdminLayoutRoute ||
-  isDynamicAdminRoute ||
-  isOrderDetailsRoute;
+  const isOrderDetailsRoute =
+    location.pathname.startsWith("/order/");
+
+  const hideGlobalHeader =
+    isAdminLayoutRoute ||
+    isDynamicAdminRoute ||
+    isOrderDetailsRoute;
   // =====================================================
   // DASHBOARD ROUTES (NO WEBSITE HEADER)
   //
@@ -684,7 +686,7 @@ const hideGlobalHeader =
 
             {/* ADD EMPLOYEE (same AddEmployee component as Admin) */}
             <Route path="employees/add" element={<AddEmployee />} />
-     
+
             {/* ADD SHIFTING (same ShiftManagement component as Admin) */}
             <Route path="shifting/add" element={<ShiftManagement />} />
 
@@ -729,7 +731,7 @@ const hideGlobalHeader =
             <Route path="addresses" element={<MyAddress />} />
 
 
-                        {/* NEW — Customer pages inside the corporate dashboard (Wishlist, Cart, Change Password) */}
+            {/* NEW — Customer pages inside the corporate dashboard (Wishlist, Cart, Change Password) */}
             <Route path="wishlist" element={<Wishlist />} />
             <Route path="cart" element={<Cart />} />
             <Route path="change-password" element={<Password />} />
@@ -779,14 +781,14 @@ const hideGlobalHeader =
 
             <Route path="/add-employee" element={<AddEmployee />} />
             <Route path="/employees" element={<EmployeeList />} />
-<Route path="/admin/employees" element={<EmployeeList />} />
+            <Route path="/admin/employees" element={<EmployeeList />} />
 
             {/* EDIT EMPLOYEE */}
 
-<Route
-  path="/admin/edit-employee/:id"
-  element={<EditEmployee />}
-/>
+            <Route
+              path="/admin/edit-employee/:id"
+              element={<EditEmployee />}
+            />
 
             {/* LEAVES */}
 
@@ -814,8 +816,8 @@ const hideGlobalHeader =
             />
 
             <Route
-                  path="/branch-management"
-                  element={<BranchManagement />}
+              path="/branch-management"
+              element={<BranchManagement />}
             />
 
             {/* BRAND */}
@@ -997,7 +999,7 @@ const hideGlobalHeader =
 
           <Route path="/products" element={<Products />} />
           <Route path="/shop" element={<Shop />} />
-                   {/*
+          {/*
   The last part of the URL is now the product slug,
   e.g. /shop/product/asus-expertbook-0808
 */}
@@ -1029,7 +1031,7 @@ const hideGlobalHeader =
           <Route path="/my-address" element={<MyAddress />} />
           <Route path="/add-address" element={<AddAddress />} />
 
-                   <Route path="/edit-address/:id" element={<EditAddress />} />   {/* add this line */}
+          <Route path="/edit-address/:id" element={<EditAddress />} />   {/* add this line */}
 
           {/* =================================================
               CUSTOMER CHECKOUT
@@ -1100,9 +1102,9 @@ const hideGlobalHeader =
             />
 
             <Route
-  path="branch-management"
-  element={<BranchManagement />}
-/>
+              path="branch-management"
+              element={<BranchManagement />}
+            />
 
             {/* RENTAL INVOICE */}
             <Route
@@ -1192,7 +1194,7 @@ const hideGlobalHeader =
                 ReceptionistLayout remains FIXED.
             ===================================================== */}
 
-             {/* <Route path="accountant">
+            {/* <Route path="accountant">
               <Route
                 path="sales-payments"
                 element={<SalesPaymentManagement />}
@@ -1204,7 +1206,7 @@ const hideGlobalHeader =
               <Route path="financial-reports" element={<FinancialReports />} />
             </Route>  */}
 
-{/* 
+            {/* 
 <Route
   path="/accountant-dashboard"
   element={
@@ -1292,11 +1294,11 @@ const hideGlobalHeader =
           </Route>
 
           {/* =====================================================
-              IT SUPPORT
-          ===================================================== */}
+    IT SUPPORT
+===================================================== */}
 
           <Route path="/itsupport-dashboard" element={<ItSupport />}>
-            <Route index element={<>Dashboard</>} />
+            <Route index element={<ItDashboard />} />
             <Route path="charges" element={<RepairRates />} />
             <Route path="add-new-ticket" element={<CusromerTicket />} />
             <Route path="leave" element={<ItSupportLeave />} />
@@ -1305,62 +1307,62 @@ const hideGlobalHeader =
           </Route>
 
 
-{/* =====================================================
+          {/* =====================================================
     ACCOUNTANT DASHBOARD
     SEPARATE ACCOUNTANT LAYOUT
 ===================================================== */}
 
-<Route
-  path="/accountant-dashboard"
-  element={<AccountantLayout />}
->
-  {/* ACCOUNTANT DASHBOARD HOME */}
-  <Route
-    index
-    element={<AccountantDashboard />}
-  />
+          <Route
+            path="/accountant-dashboard"
+            element={<AccountantLayout />}
+          >
+            {/* ACCOUNTANT DASHBOARD HOME */}
+            <Route
+              index
+              element={<AccountantDashboard />}
+            />
 
-  {/* ACCOUNTANT MODULES */}
-  <Route path="accountant">
+            {/* ACCOUNTANT MODULES */}
+            <Route path="accountant">
 
-    {/* SALES & PAYMENTS */}
-    <Route
-      path="sales-payments"
-      element={<SalesPaymentManagement />}
-    />
+              {/* SALES & PAYMENTS */}
+              <Route
+                path="sales-payments"
+                element={<SalesPaymentManagement />}
+              />
 
-    {/* INVOICES */}
-    <Route
-      path="invoices"
-      element={<InvoiceManagement />}
-    />
+              {/* INVOICES */}
+              <Route
+                path="invoices"
+                element={<InvoiceManagement />}
+              />
 
-    {/* SALARY */}
-    <Route
-      path="salary"
-      element={<SalaryManagement />}
-    />
+              {/* SALARY */}
+              <Route
+                path="salary"
+                element={<SalaryManagement />}
+              />
 
-    {/* EXPENSES */}
-    <Route
-      path="expenses"
-      element={<ExpenseManagement />}
-    />
+              {/* EXPENSES */}
+              <Route
+                path="expenses"
+                element={<ExpenseManagement />}
+              />
 
-    {/* PURCHASE MANAGEMENT */}
-    <Route
-      path="purchases"
-      element={<PurchaseManagement />}
-    />
+              {/* PURCHASE MANAGEMENT */}
+              <Route
+                path="purchases"
+                element={<PurchaseManagement />}
+              />
 
-    {/* FINANCIAL REPORTS */}
-    <Route
-      path="financial-reports"
-      element={<FinancialReports />}
-    />
+              {/* FINANCIAL REPORTS */}
+              <Route
+                path="financial-reports"
+                element={<FinancialReports />}
+              />
 
-  </Route>
-</Route>
+            </Route>
+          </Route>
 
           {/* =====================================================
               STANDALONE ACCOUNTANT
